@@ -18,11 +18,13 @@
       "vite/client",
       "vite-plugin-pages/client",
       "unplugin-vue-macros/macros-global",
-      "fs-extra"
+      "fs-extra",
+      "node"
     ],
     "paths": {
       "~/*": ["src/*"]
-    }
+    },
+    "noImplicitAny": false
   },
   "vueCompilerOptions": {
     "plugins": [

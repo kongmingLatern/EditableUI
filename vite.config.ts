@@ -9,6 +9,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 
+
 export default defineConfig({
   server: {
     watch: {
@@ -55,6 +56,7 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
+
   ],
   test: {
     environment: 'jsdom',
