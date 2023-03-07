@@ -1,14 +1,17 @@
 <template>
   <button @dblclick="editInputContent" btn>
     <span v-show="!isShow">
-      <slot name="value">
-        {{ value }}
-      </slot>
+      <!-- <slot></slot> -->
+      <div v-for="item in allChildren" :key="item">
+        {{ item.value }}
+      </div>
     </span>
     <span>
       <input
+        v-for="item in allChildren"
+        :key="item"
         ref="input"
-        v-model="value"
+        v-model="item.value"
         v-show="isShow"
         @blur="isShow = false"
         type="text"
@@ -19,20 +22,52 @@
   </button>
 </template>
 
-<script setup lang="ts">
-const props = defineProps<{
-  value?: string
-}>()
-const value = ref(props?.value)
-const input = ref<HTMLInputElement>()
-const isShow = ref<boolean>(false)
+<script lang="ts">
+import { getAllSlotsChildrenContext } from '~/shared/helpers'
 
-function editInputContent(event: Event) {
-  isShow.value = true
-  nextTick(() => {
-    input.value?.focus()
-  })
-}
+export default defineComponent({
+  setup(props, { slots }) {
+    const value = ref((props as any).value)
+    const input = ref<HTMLInputElement>()
+    const isShow = ref<boolean>(false)
+    const children = ref<unknown[]>(slots.default?.() || [])
+    let allChildren = getAllSlotsChildrenContext(children)
+    // 给所有的 Child 添加响应式属性
+    allChildren = ref<any[]>(
+      allChildren.value.map(child => {
+        if (typeof child === 'object' && child !== null) {
+          Object.defineProperty(child, 'value', {
+            get() {
+              return value.value
+            },
+            set(newValue) {
+              value.value = newValue
+            },
+          })
+        } else {
+          // 如果是基本类型，赋值 ref 类型
+          child = ref(child)
+        }
+        return child
+      })
+    )
+    console.log(allChildren)
+
+    function editInputContent(event: Event) {
+      isShow.value = true
+      nextTick(() => {
+        input.value?.focus()
+      })
+    }
+    return {
+      value,
+      input,
+      isShow,
+      editInputContent,
+      allChildren,
+    }
+  },
+})
 </script>
 
 <style scoped></style>
