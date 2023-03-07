@@ -1,5 +1,7 @@
 <template>
-  <Button value="123" />
+  <Button>
+    <template #value>123123</template>
+  </Button>
 </template>
 
 <script setup lang="ts"></script>

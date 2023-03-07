@@ -9,13 +9,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 
-
 export default defineConfig({
-  server: {
-    watch: {
-      usePolling: true
-    }
-  },
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
@@ -42,9 +36,7 @@ export default defineConfig({
         '@vueuse/core',
       ],
       dts: true,
-      dirs: [
-        './src/composables',
-      ],
+      dirs: ['./src/composables'],
       vueTemplate: true,
     }),
 
@@ -56,12 +48,11 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
-
   ],
   test: {
     environment: 'jsdom',
   },
   define: {
-    'process.env': process.env
+    'process.env': process.env,
   },
 })

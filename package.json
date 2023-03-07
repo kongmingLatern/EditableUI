@@ -1,4 +1,5 @@
 {
+  "name": "edit-component-design",
   "private": true,
   "packageManager": "pnpm@7.12.0",
   "type": "module",

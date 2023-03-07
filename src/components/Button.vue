@@ -1,7 +1,9 @@
 <template>
   <button @dblclick="editInputContent" btn>
     <span v-show="!isShow">
-      {{ value }}
+      <slot name="value">
+        {{ value }}
+      </slot>
     </span>
     <span>
       <input
@@ -19,7 +21,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  value: string
+  value?: string
 }>()
 const value = ref(props?.value)
 const input = ref<HTMLInputElement>()
@@ -30,7 +32,6 @@ function editInputContent(event: Event) {
   nextTick(() => {
     input.value?.focus()
   })
-  console.log(event)
 }
 </script>
 
