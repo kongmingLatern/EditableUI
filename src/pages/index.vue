@@ -1,27 +1,7 @@
 <template>
-  <h1 m10 @click="generateCode">123123</h1>
-  <button @click="generateCode" btn>点击</button>
-
-
-  <ul>
-    <li @click="generateCode">123123</li>
-  </ul>
+  <Button value="123" />
 </template>
 
-<script setup lang='ts'>
-import { code } from '~/shared';
+<script setup lang="ts"></script>
 
-const generateCode = (event: Event) => {
-  const element: string = (event.target! as any).nodeName.toLowerCase()
-
-  generateFile(element, event.type)
-}
-const generateFile = (element: string, type: any) => {
-  code(element, type)
-}
-
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>
