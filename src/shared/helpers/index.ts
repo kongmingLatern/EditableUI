@@ -5,7 +5,7 @@ export function getAllSlotsChildrenContext(
 ) {
   return ref(
     children.value.reduce((acc: any[], child: any) => {
-      console.log(child)
+      // console.log(child)
       if (child.__v_isVNode) {
         acc.push(child.children)
       } else {

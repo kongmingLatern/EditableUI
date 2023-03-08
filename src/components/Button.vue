@@ -51,7 +51,8 @@ export default defineComponent({
         return child
       })
     )
-    console.log(allChildren)
+    console.log('allChildren', allChildren)
+    console.log('typeof', typeof allChildren.value[0])
 
     function editInputContent(event: Event) {
       isShow.value = true
