@@ -1,5 +1,10 @@
 <template>
   <Button>按鈕 按鈕 按鈕 按鈕 按鈕</Button>
+  <Button>
+    <div>
+      <span>123123</span>
+    </div>
+  </Button>
 </template>
 
 <script setup lang="ts">
