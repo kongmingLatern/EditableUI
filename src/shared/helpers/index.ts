@@ -1,24 +1,20 @@
 export function getAllSlotsChildrenContext(
   children: any[]
 ) {
-  // const t = Array.isArray(children)
-  // console.log(t)
   const newArr = children.map(child => {
-    if (child.children) {
+    if (!Array.isArray(child.children)) {
       return {
-        children: child.children,
+        value: child.children,
+      }
+    } else {
+      return {
+        value: '',
+        children: getAllSlotsChildrenContext(
+          child.children
+        ),
       }
     }
   })
-  // children.reduce((acc: any[], child: any) => {
-  //   console.log('child', child)
-  //   if (child.__v_isVNode) {
-  //     acc.push(child.children)
-  //   }
-  //   return acc
-  // })
-  console.log('text', newArr)
-
   return reactive(newArr)
 
   // return ref(
