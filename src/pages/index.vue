@@ -8,6 +8,7 @@
 </template>
 
 <script setup lang="ts">
+import Button from '~/components/Button'
 // const num = ref<number>(0)
 </script>
 

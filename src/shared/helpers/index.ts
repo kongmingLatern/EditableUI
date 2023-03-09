@@ -1,14 +1,22 @@
+import { SlotsType } from '~/shared/SlotsType'
+function getType(child) {
+  return typeof child.type === 'symbol'
+    ? SlotsType.TEXT_OR_FRAGMENT_CONTENT
+    : SlotsType.ELEMENT_CONTENT
+}
 export function getAllSlotsChildrenContext(
   children: any[]
 ) {
   const newArr = children.map(child => {
     if (!Array.isArray(child.children)) {
       return {
+        type: getType(child),
         value: child.children,
       }
     } else {
       return {
         value: '',
+        type: getType(child),
         children: getAllSlotsChildrenContext(
           child.children
         ),

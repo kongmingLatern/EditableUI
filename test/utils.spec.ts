@@ -1,38 +1,45 @@
-import { mount } from '@vue/test-utils'
-import Button from '~/components/Button.vue'
 import { getAllSlotsChildrenContext } from '~/shared/helpers'
+import { SlotsType } from '~/shared/SlotsType'
 
 describe('getAllSlotsChildrenContext Function', () => {
   it('TextContent', () => {
-    const wrapper = mount(Button, {
-      slots: {
-        default: 'Click me',
+    const data = [
+      {
+        type: Symbol(1),
+        children: 'Click me',
       },
-    })
-    const data = (wrapper.vm.$slots as any).default()
+    ]
     const allChildren = getAllSlotsChildrenContext(data)
     expect(allChildren).toEqual(
       reactive([
         {
+          type: SlotsType.TEXT_OR_FRAGMENT_CONTENT,
           value: 'Click me',
         },
       ])
     )
   })
   it('nested tag', () => {
-    const wrapper = mount(Button, {
-      slots: {
-        default: h('div', null, h('span', null, '123123')),
+    const data = [
+      {
+        type: 'div',
+        children: [
+          {
+            type: 'span',
+            children: '123123',
+          },
+        ],
       },
-    })
-    const data = (wrapper.vm.$slots as any).default()
+    ]
     const allChildren = getAllSlotsChildrenContext(data)
     expect(allChildren).toEqual(
       reactive([
         {
+          type: SlotsType.ELEMENT_CONTENT,
           value: '',
           children: [
             {
+              type: SlotsType.ELEMENT_CONTENT,
               value: '123123',
             },
           ],
@@ -41,30 +48,45 @@ describe('getAllSlotsChildrenContext Function', () => {
     )
   })
   it('array slots with TextContent', () => {
-    const wrapper = mount(Button, {
-      slots: {
-        default: [
-          h('div', null, h('span', null, '123123')),
-          'lalala',
+    const data = [
+      {
+        type: 'div',
+        children: [
+          {
+            type: 'span',
+            children: '123123',
+          },
         ],
       },
-    })
-    const data = (wrapper.vm.$slots as any).default()
+      {
+        type: Symbol(1),
+        children: [
+          {
+            type: Symbol(1),
+            children: 'lalala',
+          },
+        ],
+      },
+    ]
     const allChildren = getAllSlotsChildrenContext(data)
     expect(allChildren).toEqual(
       reactive([
         {
+          type: SlotsType.ELEMENT_CONTENT,
           value: '',
           children: [
             {
+              type: SlotsType.ELEMENT_CONTENT,
               value: '123123',
             },
           ],
         },
         {
+          type: SlotsType.TEXT_OR_FRAGMENT_CONTENT,
           value: '',
           children: [
             {
+              type: SlotsType.TEXT_OR_FRAGMENT_CONTENT,
               value: 'lalala',
             },
           ],
@@ -73,27 +95,36 @@ describe('getAllSlotsChildrenContext Function', () => {
     )
   })
   it('array slots with common tag', () => {
-    const wrapper = mount(Button, {
-      slots: {
-        default: [
-          h('div', null, h('span', null, '123123')),
-          h('div', null, 'hahaha'),
+    const data = [
+      {
+        type: 'div',
+        children: [
+          {
+            type: 'span',
+            children: '123123',
+          },
         ],
       },
-    })
-    const data = (wrapper.vm.$slots as any).default()
+      {
+        type: 'span',
+        children: 'hahaha',
+      },
+    ]
     const allChildren = getAllSlotsChildrenContext(data)
     expect(allChildren).toEqual(
       reactive([
         {
+          type: SlotsType.ELEMENT_CONTENT,
           value: '',
           children: [
             {
+              type: SlotsType.ELEMENT_CONTENT,
               value: '123123',
             },
           ],
         },
         {
+          type: SlotsType.ELEMENT_CONTENT,
           value: 'hahaha',
         },
       ])
