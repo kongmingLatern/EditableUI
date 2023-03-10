@@ -10,11 +10,14 @@ specifiers:
   '@vue-macros/volar': ^0.5.15
   '@vue/test-utils': ^2.2.7
   '@vueuse/core': ^9.11.0
+  add-location: link:@vivo/vue-dev-code-link/vite/add-location
+  add-location01: link:@vivo/vue-dev-code-link/vite/add-location01
   eslint: ^8.32.0
   fs-extra: ^11.1.0
   jsdom: ^21.0.0
   pnpm: ^7.25.1
   prettier: ^2.8.3
+  server: link:@vivo/vue-dev-code-link/vite/server
   taze: ^0.8.5
   typescript: ^4.9.4
   unocss: ^0.48.4
@@ -42,11 +45,14 @@ devDependencies:
   '@vitejs/plugin-vue-jsx': 3.0.0_vite@4.0.4+vue@3.2.45
   '@vue-macros/volar': 0.5.15_vue-tsc@1.0.24+vue@3.2.45
   '@vue/test-utils': 2.2.7_vue@3.2.45
+  add-location: link:@vivo/vue-dev-code-link/vite/add-location
+  add-location01: link:@vivo/vue-dev-code-link/vite/add-location01
   eslint: 8.32.0
   fs-extra: 11.1.0
   jsdom: 21.0.0
   pnpm: 7.25.1
   prettier: 2.8.3
+  server: link:@vivo/vue-dev-code-link/vite/server
   taze: 0.8.5
   typescript: 4.9.4
   unocss: 0.48.4_vite@4.0.4

@@ -1,15 +1,13 @@
 <template>
-  <Button>按鈕 按鈕 按鈕 按鈕 按鈕</Button>
-  <Button>
-    <div>
-      <span>123123</span>
-    </div>
-  </Button>
+  <Edit>
+    <Button1 />
+  </Edit>
+  <Button1></Button1>
 </template>
 
 <script setup lang="ts">
-import Button from '~/components/Button'
-// const num = ref<number>(0)
+import Edit from '~/components/Edit'
+import Button1 from '~/components/Button'
 </script>
 
 <style scoped></style>
