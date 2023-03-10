@@ -1,10 +1,10 @@
 import {
-  getAllSlotsChildrenContext,
+  reactiveChildren,
   renderChildren,
 } from '~/shared/helpers'
 import { SlotsType } from '~/shared/SlotsType'
 
-describe('getAllSlotsChildrenContext Function', () => {
+describe('reactiveChildren Function', () => {
   it('TextContent', () => {
     const data = [
       {
@@ -12,7 +12,7 @@ describe('getAllSlotsChildrenContext Function', () => {
         children: 'Click me',
       },
     ]
-    const allChildren = getAllSlotsChildrenContext(data)
+    const allChildren = reactiveChildren(data)
     expect(allChildren).toEqual(
       reactive([
         {
@@ -34,7 +34,7 @@ describe('getAllSlotsChildrenContext Function', () => {
         ],
       },
     ]
-    const allChildren = getAllSlotsChildrenContext(data)
+    const allChildren = reactiveChildren(data)
     expect(allChildren).toEqual(
       reactive([
         {
@@ -71,7 +71,7 @@ describe('getAllSlotsChildrenContext Function', () => {
         ],
       },
     ]
-    const allChildren = getAllSlotsChildrenContext(data)
+    const allChildren = reactiveChildren(data)
     expect(allChildren).toEqual(
       reactive([
         {
@@ -113,7 +113,7 @@ describe('getAllSlotsChildrenContext Function', () => {
         children: 'hahaha',
       },
     ]
-    const allChildren = getAllSlotsChildrenContext(data)
+    const allChildren = reactiveChildren(data)
     expect(allChildren).toEqual(
       reactive([
         {
@@ -132,6 +132,35 @@ describe('getAllSlotsChildrenContext Function', () => {
         },
       ])
     )
+  })
+  it.skip('render Component', () => {
+    const data = [
+      {
+        type: {
+          setup: () => {
+            return {
+              children: [
+                {
+                  type: 'span',
+                  children: '123123',
+                },
+              ],
+            }
+          },
+        },
+        children: null,
+      },
+    ]
+
+    const allChildren = reactiveChildren(data)
+    expect(allChildren).toEqual([
+      reactive([
+        {
+          type: SlotsType.COMPONENT_CONTENT,
+          value: '123123',
+        },
+      ]),
+    ])
   })
 })
 

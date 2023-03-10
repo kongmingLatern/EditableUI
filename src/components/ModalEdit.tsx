@@ -16,7 +16,11 @@ export default defineComponent({
     }
     function getAllChildrenEdit(children) {
       return children.map(child => {
-        if (child.value === '' && child.children) {
+        if (Array.isArray(child)) {
+          return child.map(ch =>
+            getAllChildrenEdit(ch.children)
+          )
+        } else if (child.value === '' && child.children) {
           return getAllChildrenEdit(child.children)
         } else {
           return <Edit child={child} onSave={save} />

@@ -1,5 +1,5 @@
 import {
-  getAllSlotsChildrenContext,
+  reactiveChildren,
   renderChildren,
 } from '~/shared/helpers'
 import ModalEdit from './ModalEdit'
@@ -9,10 +9,8 @@ export default defineComponent({
     const isShow = ref<boolean>(false)
     const input = ref<HTMLInputElement>()
     const children = slots.default?.() || []
-    // console.log(children[0].ctx.setupState.Button1.setup)
-    // children[0].ctx.setupState.Button1.setup()()
-    let allChildren = getAllSlotsChildrenContext(children)
-    console.log(allChildren)
+    let allChildren = reactiveChildren(children)
+    console.log('allChildren', allChildren)
 
     function editInputContent(event: Event) {
       isShow.value = true
@@ -26,7 +24,14 @@ export default defineComponent({
         <div onDblclick={editInputContent}>
           {allChildren.map(
             (child: { value: string; children: any }) => {
-              if (child.value === '' && child.children) {
+              if (Array.isArray(child)) {
+                return child.map(ch =>
+                  renderChildren(ch.children)
+                )
+              } else if (
+                child.value === '' &&
+                child.children
+              ) {
                 return renderChildren(child.children)
               } else if (child.value !== '') {
                 return child.value
