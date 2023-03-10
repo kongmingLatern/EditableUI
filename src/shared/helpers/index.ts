@@ -7,6 +7,7 @@ function getType(child) {
 export function getAllSlotsChildrenContext(
   children: any[]
 ) {
+  console.log(children)
   const newArr = children.map(child => {
     if (!Array.isArray(child.children)) {
       return {
@@ -14,6 +15,7 @@ export function getAllSlotsChildrenContext(
         value: child.children,
       }
     } else {
+      // 普通节点
       return {
         value: '',
         type: getType(child),
@@ -24,16 +26,13 @@ export function getAllSlotsChildrenContext(
     }
   })
   return reactive(newArr)
-
-  // return ref(
-  //   children.value.reduce((acc: any[], child: any) => {
-  //     // console.log(child)
-  //     if (child.__v_isVNode) {
-  //       acc.push(child.children)
-  //     } else if (typeof child === 'object') {
-  //       getAllSlotsChildrenContext(child)
-  //     }
-  //     return acc
-  //   }, [])
-  // )
+}
+export function renderChildren(children) {
+  return children.map(child => {
+    if (child.value === '' && child.children) {
+      return renderChildren(child.children)
+    } else {
+      return child.value
+    }
+  })
 }

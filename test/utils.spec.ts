@@ -1,4 +1,7 @@
-import { getAllSlotsChildrenContext } from '~/shared/helpers'
+import {
+  getAllSlotsChildrenContext,
+  renderChildren,
+} from '~/shared/helpers'
 import { SlotsType } from '~/shared/SlotsType'
 
 describe('getAllSlotsChildrenContext Function', () => {
@@ -129,5 +132,54 @@ describe('getAllSlotsChildrenContext Function', () => {
         },
       ])
     )
+  })
+})
+
+describe('renderChildren Function', () => {
+  it('renderCommon', () => {
+    const data = [
+      {
+        type: SlotsType.TEXT_OR_FRAGMENT_CONTENT,
+        value: 'hahaha',
+      },
+    ]
+    const result = renderChildren(data)
+    expect(result).toEqual(['hahaha'])
+  })
+  it('nestedChildren', () => {
+    const data = [
+      {
+        type: SlotsType.ELEMENT_CONTENT,
+        value: '',
+        children: [
+          {
+            type: SlotsType.TEXT_OR_FRAGMENT_CONTENT,
+            value: '123123',
+          },
+        ],
+      },
+    ]
+    const result = renderChildren(data)
+    expect(result).toEqual([['123123']])
+  })
+  it('nestedChildrenAndCommon', () => {
+    const data = [
+      {
+        type: SlotsType.ELEMENT_CONTENT,
+        value: '',
+        children: [
+          {
+            type: SlotsType.TEXT_OR_FRAGMENT_CONTENT,
+            value: '123123',
+          },
+        ],
+      },
+      {
+        type: SlotsType.TEXT_OR_FRAGMENT_CONTENT,
+        value: 'hahaha',
+      },
+    ]
+    const result = renderChildren(data)
+    expect(result).toEqual([['123123'], 'hahaha'])
   })
 })
