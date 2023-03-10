@@ -44,13 +44,23 @@ export function reactiveChildren(children: any[]) {
 }
 
 export function renderChildren(children) {
-  console.log('children', children, Array.isArray(children))
-
   return children.map(child => {
     if (child.value === '' && child.children) {
-      return renderChildren(child.children)
+      return h(
+        'button',
+        {
+          class: 'btn',
+        },
+        renderChildren(child.children)
+      )
     } else {
-      return child.value
+      return h(
+        'button',
+        {
+          class: 'btn',
+        },
+        child.value
+      )
     }
   })
 }
