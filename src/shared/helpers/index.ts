@@ -1,6 +1,12 @@
 function getAllSlotsChildrenContext(children: any[]) {
+  console.log('children', children)
   const newArr = children.map(child => {
-    const isComponent = child.type.setup?.()()
+    const isComponent =
+      child.type.render?.() ??
+      child.type.setup?.() ??
+      child.type.setup?.()?.()
+    console.log(isComponent)
+
     if (isComponent) {
       return getAllSlotsChildrenContext([isComponent])
     } else if (!Array.isArray(child.children)) {

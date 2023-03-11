@@ -38,7 +38,6 @@ export default defineComponent({
 
     const input = ref<HTMLInputElement>()
     initProps(child!.props)
-    // allProps ?? (allProps = combineAttribute(child!.props))
     console.log('render', allProps)
     const Input = (prop, type, value) => {
       const inputEvent = (event, type) => {
@@ -73,6 +72,7 @@ export default defineComponent({
 
     function showAttribute(index) {
       console.log('showAttribute', allProps)
+      console.log('index', index)
 
       return allProps[index].map(prop => {
         return (

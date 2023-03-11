@@ -1,5 +1,9 @@
 export default defineComponent({
   setup() {
-    return () => <span>123123</span>
+    return (
+      <>
+        <span className="text-green">123123</span>
+      </>
+    )
   },
 })

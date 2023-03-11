@@ -1,7 +1,9 @@
 <template>
-  <Edit>
-    <Button1></Button1>
-  </Edit>
+  <Edit><A/></Edit>
+  <Button1></Button1>
+  <span>12313</span>
+  <A />
+  123123
 </template>
 
 <script setup lang="ts">
