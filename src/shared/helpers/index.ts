@@ -16,18 +16,20 @@ export function getComponentContext(children: any[]) {
 }
 
 function getAllSlotsChildrenContext(children: any[]) {
+  console.log('children', children)
   const newArr = children.map(child => {
     const isComponent = child.type.setup?.()()
     if (isComponent) {
       return getAllSlotsChildrenContext([isComponent])
     } else if (!Array.isArray(child.children)) {
       return {
-        // type: getType(child),
         type: child.type,
+        props: child.props,
         value: child.children,
       }
     } else {
       return {
+        props: child.props,
         value: '',
         type: child.type,
         children: getAllSlotsChildrenContext(
@@ -49,19 +51,11 @@ export function renderChildren(children) {
     if (child.value === '' && child.children) {
       return h(
         child.type,
-        {
-          class: 'btn',
-        },
+        child.props,
         renderChildren(child.children)
       )
     } else {
-      return h(
-        child.type,
-        {
-          class: 'btn',
-        },
-        child.value
-      )
+      return h(child.type, child.props, child.value)
     }
   })
 }

@@ -34,7 +34,7 @@ export default defineComponent({
             ) {
               return renderChildren(child.children)
             } else if (child.value !== '') {
-              return h(child.type, {}, child.value)
+              return h(child.type, child.props, child.value)
             }
           })}
         </div>

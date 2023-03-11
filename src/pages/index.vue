@@ -1,15 +1,10 @@
 <template>
   <Edit>
-    <span>123123</span>
+    <span btn>12313</span>
   </Edit>
-  <!-- <Edit>
-    <div>
-      <span>123123</span>
-      <span>1sjdfiosdjfio</span>
-      <span>123123</span>
-      <span>1231231oqwjeoi</span>
-    </div>
-  </Edit> -->
+  <span btn>1lallala</span>
+  <span btn>12313</span>
+  <span bg-red-500>12313</span>
   <Button1></Button1>
 </template>
 
