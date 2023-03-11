@@ -34,9 +34,6 @@ export default defineComponent({
       const inputEvent = (event, type) => {
         const newValue = (event.target as HTMLInputElement)
           .value
-        console.log('newValue', newValue)
-        console.log('value', value)
-        console.log('prop', prop)
 
         if (type === 'key') {
           prop.key = newValue
@@ -51,7 +48,7 @@ export default defineComponent({
           className="color-black z-10 bg-pink-100"
           ref={input}
           type="textarea"
-          value={value === null ? 'null' : value}
+          value={value === '' ? 'No Attribute' : value}
           onInput={event => inputEvent(event, type)}
         />
       )
