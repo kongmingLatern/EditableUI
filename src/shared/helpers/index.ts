@@ -6,12 +6,12 @@ function getAllSlotsChildrenContext(children: any[]) {
     } else if (!Array.isArray(child.children)) {
       return {
         type: child.type,
-        props: child.props,
+        props: child.props || {},
         value: child.children,
       }
     } else {
       return {
-        props: child.props,
+        props: child.props || {},
         value: '',
         type: child.type,
         children: getAllSlotsChildrenContext(
@@ -28,15 +28,16 @@ export function reactiveChildren(children: any[]) {
 }
 
 export function renderChildren(children) {
+  console.log('children', children)
   return children.map(child => {
     if (child.value === '' && child.children) {
       return h(
         child.type,
-        child.props,
+        child.props || {},
         renderChildren(child.children)
       )
     } else {
-      return h(child.type, child.props, child.value)
+      return h(child.type, child.props || {}, child.value)
     }
   })
 }

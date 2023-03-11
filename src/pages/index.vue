@@ -1,11 +1,7 @@
 <template>
   <Edit>
-    <span btn>1lallala</span>
-    <span btn>12313</span>
-    <span bg-red-500>12313</span>
+    <Button1></Button1>
   </Edit>
-  <!-- <span btn flex text-blue>12313</span> -->
-  <Button1></Button1>
 </template>
 
 <script setup lang="ts">

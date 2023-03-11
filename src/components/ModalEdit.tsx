@@ -25,7 +25,13 @@ export default defineComponent({
         } else if (child.value === '' && child.children) {
           return getAllChildrenEdit(child.children)
         } else {
-          return <EditTable child={child} index={ index} onSave={save} />
+          return (
+            <EditTable
+              child={child}
+              index={index}
+              onSave={save}
+            />
+          )
         }
       })
     }

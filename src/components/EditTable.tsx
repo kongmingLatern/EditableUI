@@ -34,6 +34,8 @@ export default defineComponent({
     },
   },
   setup({ child, index }) {
+    console.log('child', child)
+
     const input = ref<HTMLInputElement>()
     initProps(child!.props)
     // allProps ?? (allProps = combineAttribute(child!.props))

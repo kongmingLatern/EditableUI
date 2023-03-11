@@ -26,7 +26,11 @@ export default defineComponent({
           {allChildren.map(child => {
             if (Array.isArray(child)) {
               return child.map(ch =>
-                renderChildren(ch.children)
+                h(
+                  ch.type,
+                  ch.props || {},
+                  renderChildren(ch.children)
+                )
               )
             } else if (
               child.value === '' &&
@@ -36,7 +40,11 @@ export default defineComponent({
             } else if (child.value !== '') {
               console.log('childProps', child.props)
 
-              return h(child.type, child.props, child.value)
+              return h(
+                child.type,
+                child.props || {},
+                child.value
+              )
             }
           })}
         </div>
