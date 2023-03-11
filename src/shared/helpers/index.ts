@@ -5,7 +5,6 @@ function getAllSlotsChildrenContext(children: any[]) {
       child.type.render?.() ??
       child.type.setup?.() ??
       child.type.setup?.()?.()
-    console.log(isComponent)
 
     if (isComponent) {
       return getAllSlotsChildrenContext([isComponent])
@@ -35,15 +34,21 @@ export function reactiveChildren(children: any[]) {
 
 export function renderChildren(children) {
   console.log('children', children)
-  return children.map(child => {
-    if (child.value === '' && child.children) {
-      return h(
-        child.type,
-        child.props || {},
-        renderChildren(child.children)
-      )
-    } else {
-      return h(child.type, child.props || {}, child.value)
-    }
-  })
+  return Array.isArray(children)
+    ? children.map(child => {
+        if (child.value === '' && child.children) {
+          return h(
+            child.type,
+            child.props || {},
+            renderChildren(child.children)
+          )
+        } else {
+          return h(
+            child.type,
+            child.props || {},
+            child.value
+          )
+        }
+      })
+    : children
 }

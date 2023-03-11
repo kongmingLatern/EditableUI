@@ -25,12 +25,16 @@ export default defineComponent({
         <div onDblclick={editInputContent}>
           {allChildren.map(child => {
             if (Array.isArray(child)) {
+              console.log('aaaa', child)
+
               return child.map(ch =>
-                h(
-                  ch.type,
-                  ch.props || {},
-                  renderChildren(ch.children)
-                )
+                ch.value
+                  ? h(ch.type, ch.props || {}, ch.value)
+                  : h(
+                      ch.type,
+                      ch.props || {},
+                      renderChildren(ch.children)
+                    )
               )
             } else if (
               child.value === '' &&
