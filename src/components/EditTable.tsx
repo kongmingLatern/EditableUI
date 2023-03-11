@@ -1,3 +1,9 @@
+let allProps: any = []
+
+function initProps(childProps) {
+  allProps.push(combineAttribute(childProps))
+}
+
 function combineAttribute(props) {
   const propsKeys = Object.keys(props)
   const valueKeys = Object.values(props)
@@ -17,11 +23,6 @@ function combineArrayToAttribute(arr: Array<any>) {
   })
   console.log(result)
   return result
-}
-
-let allProps: any = []
-function initProps(childProps) {
-  allProps.push(combineAttribute(childProps))
 }
 
 export default defineComponent({

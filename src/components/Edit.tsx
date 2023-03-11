@@ -1,7 +1,5 @@
-import {
-  reactiveChildren,
-  renderChildren,
-} from '~/shared/helpers'
+import { reactiveChildren } from '~/shared/helpers'
+import { renderAllChildren } from '~/runtime'
 import ModalEdit from './ModalEdit'
 
 export default defineComponent({
@@ -20,43 +18,18 @@ export default defineComponent({
       })
     }
 
-    return () => (
-      <>
-        <div onDblclick={editInputContent}>
-          {allChildren.map(child => {
-            if (Array.isArray(child)) {
-              console.log('aaaa', child)
-
-              return child.map(ch =>
-                ch.value
-                  ? h(ch.type, ch.props || {}, ch.value)
-                  : h(
-                      ch.type,
-                      ch.props || {},
-                      renderChildren(ch.children)
-                    )
-              )
-            } else if (
-              child.value === '' &&
-              child.children
-            ) {
-              return renderChildren(child.children)
-            } else if (child.value !== '') {
-              console.log('childProps', child.props)
-
-              return h(
-                child.type,
-                child.props || {},
-                child.value
-              )
-            }
-          })}
-        </div>
-        <ModalEdit
-          isShow={isShow}
-          allChildren={allChildren}
-        />
-      </>
-    )
+    return () => {
+      return (
+        <>
+          <div onDblclick={editInputContent}>
+            {renderAllChildren(allChildren)}
+          </div>
+          <ModalEdit
+            isShow={isShow}
+            allChildren={allChildren}
+          />
+        </>
+      )
+    }
   },
 })

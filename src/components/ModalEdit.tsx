@@ -1,5 +1,5 @@
-import EditTable from './EditTable'
 import Save from './Save'
+import { getAllChildrenEdit } from '~/runtime'
 
 export default defineComponent({
   props: {
@@ -10,40 +10,10 @@ export default defineComponent({
       type: Array,
     },
   },
-  setup({ isShow, allChildren }, { slots }) {
+  setup({ isShow, allChildren }) {
     function save() {
       isShow!.value = false
     }
-    function getAllChildrenEdit(children) {
-      console.log('children', children)
-
-      return children.map((child, index) => {
-        if (Array.isArray(child)) {
-          return child.map(ch =>
-            ch.value !== '' ? (
-              <EditTable
-                child={ch}
-                index={index}
-                onSave={save}
-              />
-            ) : (
-              getAllChildrenEdit(ch.children)
-            )
-          )
-        } else if (child.value === '' && child.children) {
-          return getAllChildrenEdit(child.children)
-        } else {
-          return (
-            <EditTable
-              child={child}
-              index={index}
-              onSave={save}
-            />
-          )
-        }
-      })
-    }
-
     return () => (
       <>
         {isShow!.value && (

@@ -32,6 +32,7 @@ export function reactiveChildren(children: any[]) {
   return reactive(getAllSlotsChildrenContext(children))
 }
 
+// helper 函数 渲染元素(主递归)
 export function renderChildren(children) {
   console.log('children', children)
   return Array.isArray(children)
