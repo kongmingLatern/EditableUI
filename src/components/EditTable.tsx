@@ -57,7 +57,7 @@ export default defineComponent({
           className="color-black z-10 bg-pink-100"
           ref={input}
           type="textarea"
-          value={value === '' ? 'No Attribute' : value}
+          value={value === '' ? '' : value}
           onInput={event => inputEvent(event, type)}
         />
       )
