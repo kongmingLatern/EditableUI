@@ -1,17 +1,23 @@
 <template>
-  <Edit><A /></Edit>
-  <A />
-  <!-- <Edit>
-    <Button1></Button1>
+  <Edit>
+    <div>
+      <A />
+    </div>
+    123123
+    <span>123123</span>
+    <div>
+      <span>12313</span>
+      <A />
+    </div>
   </Edit>
-  <span>12313</span>
-  <A />
-  123123 -->
+  <button btn font-bold bg-red-500 text-white>
+    测试按钮
+  </button>
 </template>
 
 <script setup lang="ts">
 import Edit from '~/components/Edit'
-import Button1 from '~/components/Button'
+// import Button1 from '~/components/Button'
 // const num = ref(0)
 // const arr = reactive([1, 2, 3])
 </script>

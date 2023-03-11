@@ -35,8 +35,6 @@ export default defineComponent({
     },
   },
   setup({ child, index }) {
-    console.log('child', child)
-
     const input = ref<HTMLInputElement>()
     initProps(child!.props)
     console.log('render', allProps)
