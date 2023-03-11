@@ -1,5 +1,6 @@
 <template>
   <Edit><A /></Edit>
+  <A />
   <!-- <Edit>
     <Button1></Button1>
   </Edit>

@@ -13,16 +13,19 @@ export function renderAllChildren(allChildren) {
     if (Array.isArray(child)) {
       console.log('renderAllChildren component', child)
 
-      return child.map(ch =>
+      return child.map(ch => {
         // 单节点的组件只有一个 value 值
-        isSimpleComponent(ch.value)
+        console.log('ch', ch)
+        return Array.isArray(ch)
+          ? renderChildren(ch)
+          : isSimpleComponent(ch.value)
           ? h(ch.type, ch.props || {}, ch.value)
           : h(
               ch.type,
               ch.props || {},
               renderChildren(ch.children)
             )
-      )
+      })
     } else if (isNested(child)) {
       return renderChildren(child.children)
     } else if (child.value !== '') {
@@ -39,7 +42,9 @@ export function getAllChildrenEdit(children) {
     // 组件
     if (Array.isArray(child)) {
       return child.map(ch =>
-        isSimpleComponent(ch.value) ? (
+        Array.isArray(ch) ? (
+          getAllChildrenEdit(ch)
+        ) : isSimpleComponent(ch.value) ? (
           <EditTable child={ch} index={index} />
         ) : (
           getAllChildrenEdit(ch.children)

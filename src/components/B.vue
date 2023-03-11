@@ -1,5 +1,14 @@
 <template>
-  <div>i"m BB</div>
+  <div>
+    <span>BBBBB</span>
+    <span>BBBBB</span>
+    <span>BBBBB</span>
+    <span>BBBBB</span>
+    <span>BBBBB</span>
+  </div>
+  <span>AAAA</span>
+  <span>AAAA</span>
+  <span>AAAA</span>
 </template>
 
 <script setup lang="ts"></script>
