@@ -8,6 +8,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import VueMacros from 'unplugin-vue-macros/vite'
+import presetAttributify from '@unocss/preset-attributify'
 
 export default defineConfig({
   resolve: {
@@ -48,7 +49,22 @@ export default defineConfig({
 
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
-    Unocss(),
+    Unocss({
+      presets: [presetAttributify({})],
+      shortcuts: [
+        [
+          /^btn-(.*)$/,
+          ([, c]) =>
+            `bg-${c}-400 text-${c}-100 py-2 px-4 rounded-lg`,
+        ],
+      ],
+      rules: [
+        [
+          /^m-(\d)$/,
+          ([, d]) => ({ margin: `${d / 4}rem` }),
+        ],
+      ],
+    }),
   ],
   test: {
     environment: 'jsdom',

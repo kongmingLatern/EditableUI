@@ -1,6 +1,6 @@
 <template>
   <Edit>
-    <span btn>12313</span>
+    <span btn flex text-blue>12313</span>
   </Edit>
   <span btn>1lallala</span>
   <span btn>12313</span>

@@ -1,22 +1,4 @@
-// import { SlotsType } from '~/shared/SlotsType'
-// function getType(child) {
-//   return typeof child.type === 'symbol'
-//     ? SlotsType.TEXT_OR_FRAGMENT_CONTENT
-//     : typeof child.type === 'object' && child.type !== null
-//     ? SlotsType.COMPONENT_CONTENT
-//     : SlotsType.ELEMENT_CONTENT
-// }
-
-export function getComponentContext(children: any[]) {
-  return reactive(
-    children.map(child => {
-      return getComponentContext([child])
-    })
-  )
-}
-
 function getAllSlotsChildrenContext(children: any[]) {
-  console.log('children', children)
   const newArr = children.map(child => {
     const isComponent = child.type.setup?.()()
     if (isComponent) {
@@ -46,7 +28,6 @@ export function reactiveChildren(children: any[]) {
 }
 
 export function renderChildren(children) {
-  console.log('children', children)
   return children.map(child => {
     if (child.value === '' && child.children) {
       return h(
