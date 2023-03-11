@@ -34,6 +34,8 @@ export default defineComponent({
             ) {
               return renderChildren(child.children)
             } else if (child.value !== '') {
+              console.log('childProps', child.props)
+
               return h(child.type, child.props, child.value)
             }
           })}

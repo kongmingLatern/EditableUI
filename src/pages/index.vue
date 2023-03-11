@@ -1,10 +1,10 @@
 <template>
   <Edit>
-    <span btn flex text-blue>12313</span>
+    <span btn>1lallala</span>
+    <span btn>12313</span>
+    <span bg-red-500>12313</span>
   </Edit>
-  <span btn>1lallala</span>
-  <span btn>12313</span>
-  <span bg-red-500>12313</span>
+  <!-- <span btn flex text-blue>12313</span> -->
   <Button1></Button1>
 </template>
 

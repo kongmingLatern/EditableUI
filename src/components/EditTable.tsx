@@ -19,16 +19,24 @@ function combineArrayToAttribute(arr: Array<any>) {
   return result
 }
 
-let allProps: any = null
+let allProps: any = []
+function initProps(childProps) {
+  allProps.push(combineAttribute(childProps))
+}
+
 export default defineComponent({
   props: {
     child: {
       type: Object,
     },
+    index: {
+      type: Number,
+    },
   },
-  setup({ child }) {
+  setup({ child, index }) {
     const input = ref<HTMLInputElement>()
-    allProps ?? (allProps = combineAttribute(child!.props))
+    initProps(child!.props)
+    // allProps ?? (allProps = combineAttribute(child!.props))
     console.log('render', allProps)
     const Input = (prop, type, value) => {
       const inputEvent = (event, type) => {
@@ -41,7 +49,7 @@ export default defineComponent({
         } else if (type === 'value') {
           prop['value'] = newValue
         }
-        setupProps()
+        setupProps(index)
       }
       return (
         <input
@@ -53,18 +61,18 @@ export default defineComponent({
         />
       )
     }
-    function setupProps() {
+    function setupProps(index) {
       child!.props = {}
       Object.assign(
         child!.props,
-        combineArrayToAttribute(allProps)
+        combineArrayToAttribute(allProps[index])
       )
     }
 
-    function showAttribute() {
+    function showAttribute(index) {
       console.log('showAttribute', allProps)
 
-      return allProps.map(prop => {
+      return allProps[index].map(prop => {
         return (
           <tr>
             <td>{Input(prop, 'key', prop.key)}</td>
@@ -74,8 +82,8 @@ export default defineComponent({
       })
     }
 
-    function addAttribute() {
-      allProps.push({
+    function addAttribute(index) {
+      allProps[index].push({
         key: '',
         value: '',
       })
@@ -130,13 +138,13 @@ export default defineComponent({
               <button
                 className="btn bg-white color-black"
                 onClick={() => {
-                  addAttribute()
+                  addAttribute(index)
                 }}
               >
                 +
               </button>
             </td>
-            <td>{showAttribute()}</td>
+            <td>{showAttribute(index)}</td>
           </tr>
         </table>
       </div>

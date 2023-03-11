@@ -1,4 +1,4 @@
-import Edit from './EditTable'
+import EditTable from './EditTable'
 import Save from './Save'
 
 export default defineComponent({
@@ -17,7 +17,7 @@ export default defineComponent({
     function getAllChildrenEdit(children) {
       console.log('children', children)
 
-      return children.map(child => {
+      return children.map((child, index) => {
         if (Array.isArray(child)) {
           return child.map(ch =>
             getAllChildrenEdit(ch.children)
@@ -25,7 +25,7 @@ export default defineComponent({
         } else if (child.value === '' && child.children) {
           return getAllChildrenEdit(child.children)
         } else {
-          return <Edit child={child} onSave={save} />
+          return <EditTable child={child} index={ index} onSave={save} />
         }
       })
     }
