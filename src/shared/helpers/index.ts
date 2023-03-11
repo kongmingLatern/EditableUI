@@ -2,12 +2,26 @@ function getAllSlotsChildrenContext(children: any[]) {
   console.log('children', children)
   const newArr = children.map(child => {
     const isComponent =
-      child.type.render?.() ??
-      child.type.setup?.() ??
-      child.type.setup?.()?.()
+      child?.type?.render?.() ??
+      child?.type?.setup?.() ??
+      child?.type?.setup?.()?.()
 
     if (isComponent) {
-      return getAllSlotsChildrenContext([isComponent])
+      if (typeof isComponent === 'object') {
+        return getAllSlotsChildrenContext([isComponent])
+      } else {
+        return {
+          props: child.props || {},
+          value: isComponent,
+          type:
+            typeof child.type.render() === 'string'
+              ? 'text'
+              : child.type,
+          children:
+            child?.children &&
+            getAllSlotsChildrenContext(child?.children),
+        }
+      }
     } else if (!Array.isArray(child.children)) {
       return {
         type: child.type,
@@ -20,7 +34,7 @@ function getAllSlotsChildrenContext(children: any[]) {
         value: '',
         type: child.type,
         children: getAllSlotsChildrenContext(
-          child.children
+          child?.children
         ),
       }
     }
@@ -43,12 +57,15 @@ export function renderChildren(children) {
             child.props || {},
             renderChildren(child.children)
           )
-        } else {
+        } else if (child.value) {
           return h(
             child.type,
             child.props || {},
             child.value
           )
+        } else {
+          // child 是数组的情况
+          return renderChildren(child)
         }
       })
     : children

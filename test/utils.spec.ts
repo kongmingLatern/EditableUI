@@ -17,6 +17,7 @@ describe('reactiveChildren Function', () => {
       reactive([
         {
           type: Symbol(1),
+          props: {},
           value: 'Click me',
         },
       ])
@@ -39,10 +40,12 @@ describe('reactiveChildren Function', () => {
       reactive([
         {
           type: 'div',
+          props: {},
           value: '',
           children: [
             {
               type: 'span',
+              props: {},
               value: '123123',
             },
           ],
@@ -54,9 +57,11 @@ describe('reactiveChildren Function', () => {
     const data = [
       {
         type: 'div',
+        props: {},
         children: [
           {
             type: 'span',
+            props: {},
             children: '123123',
           },
         ],
@@ -76,21 +81,25 @@ describe('reactiveChildren Function', () => {
       reactive([
         {
           type: 'div',
+          props: {},
           value: '',
           children: [
             {
               type: 'span',
               value: '123123',
+              props: {},
             },
           ],
         },
         {
           type: Symbol(1),
+          props: {},
           value: '',
           children: [
             {
               type: Symbol(1),
               value: 'lalala',
+              props: {},
             },
           ],
         },
@@ -119,21 +128,24 @@ describe('reactiveChildren Function', () => {
         {
           type: 'div',
           value: '',
+          props: {},
           children: [
             {
               type: 'span',
+              props: {},
               value: '123123',
             },
           ],
         },
         {
           type: 'span',
+          props: {},
           value: 'hahaha',
         },
       ])
     )
   })
-  it.skip('render Component', () => {
+  it('render Component', () => {
     const data = [
       {
         type: {
@@ -142,6 +154,7 @@ describe('reactiveChildren Function', () => {
               children: [
                 {
                   type: 'span',
+                  props: {},
                   children: '123123',
                 },
               ],
@@ -153,14 +166,24 @@ describe('reactiveChildren Function', () => {
     ]
 
     const allChildren = reactiveChildren(data)
-    expect(allChildren).toEqual([
-      reactive([
-        {
-          type: SlotsType.COMPONENT_CONTENT,
-          value: '123123',
-        },
-      ]),
-    ])
+    expect(allChildren).toMatchInlineSnapshot(`
+      [
+        [
+          {
+            "children": [
+              {
+                "props": {},
+                "type": "span",
+                "value": "123123",
+              },
+            ],
+            "props": {},
+            "type": undefined,
+            "value": "",
+          },
+        ],
+      ]
+    `)
   })
 })
 
@@ -173,7 +196,38 @@ describe('renderChildren Function', () => {
       },
     ]
     const result = renderChildren(data)
-    expect(result).toEqual(['hahaha'])
+    expect(result).toMatchInlineSnapshot(`
+      [
+        {
+          "__v_isVNode": true,
+          "__v_skip": true,
+          "anchor": null,
+          "appContext": null,
+          "children": "hahaha",
+          "component": null,
+          "ctx": null,
+          "dirs": null,
+          "dynamicChildren": null,
+          "dynamicProps": null,
+          "el": null,
+          "key": null,
+          "patchFlag": 0,
+          "props": {},
+          "ref": null,
+          "scopeId": null,
+          "shapeFlag": 9,
+          "slotScopeIds": null,
+          "ssContent": null,
+          "ssFallback": null,
+          "staticCount": 0,
+          "suspense": null,
+          "target": null,
+          "targetAnchor": null,
+          "transition": null,
+          "type": "TEXT_OR_FRAGMENT_CONTENT",
+        },
+      ]
+    `)
   })
   it('nestedChildren', () => {
     const data = [
@@ -189,7 +243,67 @@ describe('renderChildren Function', () => {
       },
     ]
     const result = renderChildren(data)
-    expect(result).toEqual([['123123']])
+    expect(result).toMatchInlineSnapshot(`
+      [
+        {
+          "__v_isVNode": true,
+          "__v_skip": true,
+          "anchor": null,
+          "appContext": null,
+          "children": [
+            {
+              "__v_isVNode": true,
+              "__v_skip": true,
+              "anchor": null,
+              "appContext": null,
+              "children": "123123",
+              "component": null,
+              "ctx": null,
+              "dirs": null,
+              "dynamicChildren": null,
+              "dynamicProps": null,
+              "el": null,
+              "key": null,
+              "patchFlag": 0,
+              "props": {},
+              "ref": null,
+              "scopeId": null,
+              "shapeFlag": 9,
+              "slotScopeIds": null,
+              "ssContent": null,
+              "ssFallback": null,
+              "staticCount": 0,
+              "suspense": null,
+              "target": null,
+              "targetAnchor": null,
+              "transition": null,
+              "type": "TEXT_OR_FRAGMENT_CONTENT",
+            },
+          ],
+          "component": null,
+          "ctx": null,
+          "dirs": null,
+          "dynamicChildren": null,
+          "dynamicProps": null,
+          "el": null,
+          "key": null,
+          "patchFlag": 0,
+          "props": {},
+          "ref": null,
+          "scopeId": null,
+          "shapeFlag": 17,
+          "slotScopeIds": null,
+          "ssContent": null,
+          "ssFallback": null,
+          "staticCount": 0,
+          "suspense": null,
+          "target": null,
+          "targetAnchor": null,
+          "transition": null,
+          "type": "ELEMENT_CONTENT",
+        },
+      ]
+    `)
   })
   // it('nestedChildrenAndCommon', () => {
   //   const data = [

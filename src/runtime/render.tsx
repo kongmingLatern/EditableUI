@@ -7,6 +7,8 @@ import EditTable from '~/components/EditTable'
 
 // 渲染所有元素（包括组件）
 export function renderAllChildren(allChildren) {
+  console.log('renderAllChildren', allChildren)
+
   return allChildren.map(child => {
     if (Array.isArray(child)) {
       console.log('renderAllChildren component', child)
