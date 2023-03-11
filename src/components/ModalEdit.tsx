@@ -15,6 +15,8 @@ export default defineComponent({
       isShow!.value = false
     }
     function getAllChildrenEdit(children) {
+      console.log('children', children)
+
       return children.map(child => {
         if (Array.isArray(child)) {
           return child.map(ch =>

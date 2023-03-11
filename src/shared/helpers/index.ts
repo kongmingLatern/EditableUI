@@ -1,11 +1,11 @@
-import { SlotsType } from '~/shared/SlotsType'
-function getType(child) {
-  return typeof child.type === 'symbol'
-    ? SlotsType.TEXT_OR_FRAGMENT_CONTENT
-    : typeof child.type === 'object' && child.type !== null
-    ? SlotsType.COMPONENT_CONTENT
-    : SlotsType.ELEMENT_CONTENT
-}
+// import { SlotsType } from '~/shared/SlotsType'
+// function getType(child) {
+//   return typeof child.type === 'symbol'
+//     ? SlotsType.TEXT_OR_FRAGMENT_CONTENT
+//     : typeof child.type === 'object' && child.type !== null
+//     ? SlotsType.COMPONENT_CONTENT
+//     : SlotsType.ELEMENT_CONTENT
+// }
 
 export function getComponentContext(children: any[]) {
   return reactive(
@@ -22,14 +22,14 @@ function getAllSlotsChildrenContext(children: any[]) {
       return getAllSlotsChildrenContext([isComponent])
     } else if (!Array.isArray(child.children)) {
       return {
-        type: getType(child),
+        // type: getType(child),
+        type: child.type,
         value: child.children,
       }
     } else {
-      // 普通节点
       return {
         value: '',
-        type: getType(child),
+        type: child.type,
         children: getAllSlotsChildrenContext(
           child.children
         ),
@@ -44,10 +44,11 @@ export function reactiveChildren(children: any[]) {
 }
 
 export function renderChildren(children) {
+  console.log('children', children)
   return children.map(child => {
     if (child.value === '' && child.children) {
       return h(
-        'button',
+        child.type,
         {
           class: 'btn',
         },
@@ -55,7 +56,7 @@ export function renderChildren(children) {
       )
     } else {
       return h(
-        'button',
+        child.type,
         {
           class: 'btn',
         },

@@ -37,7 +37,11 @@ export default defineComponent({
                 className="color-black z-10 bg-pink-100"
                 ref={input}
                 type="textarea"
-                value={child!.type}
+                value={
+                  typeof child!.type === 'symbol'
+                    ? 'text'
+                    : child!.type
+                }
                 onInput={event => {
                   child!.type = (
                     event.target as HTMLInputElement
