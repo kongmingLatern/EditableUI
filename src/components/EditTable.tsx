@@ -1,4 +1,7 @@
+// 记录所有元素的 props
 let allProps: any = []
+// 记录选择的元素
+let selectedElement: Element | null = null
 
 function initProps(childProps) {
   allProps.push(combineAttribute(childProps))
@@ -14,6 +17,32 @@ function combineAttribute(props) {
     }
   })
   return reactive(result)
+}
+
+function removeHighLight() {
+  selectedElement &&
+    // 去除 highLight 样式
+    selectedElement!.classList.remove('highLight')
+}
+function highLightForContent(child) {
+  function getElementByDataEdit() {
+    return document.querySelector(
+      `[data-edit="${child.props['data-edit']}"]`
+    )
+  }
+
+  const element = getElementByDataEdit()
+  // 排他思想，高亮显示
+  // 清除数组中的元素
+  removeHighLight()
+  // 存入数组
+  selectedElement = element
+  // 高亮显示
+  addHighLight(element)
+}
+
+function addHighLight(element: Element | null) {
+  element!.classList.add('highLight')
 }
 
 function combineArrayToAttribute(arr: Array<any>) {
@@ -62,6 +91,7 @@ export default defineComponent({
       )
     }
     function setupProps(index) {
+      console.log('index', index)
       child!.props = {}
       Object.assign(
         child!.props,
@@ -74,16 +104,18 @@ export default defineComponent({
       console.log('index', index)
 
       return allProps[index].map(prop => {
-        return (
+        return prop.key !== 'data-edit' ? (
           <tr>
             <td>{Input(prop, 'key', prop.key)}</td>
             <td>{Input(prop, 'value', prop.value)}</td>
           </tr>
-        )
+        ) : null
       })
     }
 
     function addAttribute(index) {
+      console.log('index', index)
+      console.log('allProps', allProps)
       allProps[index].push({
         key: '',
         value: '',
@@ -99,7 +131,7 @@ export default defineComponent({
           </tr>
           <tr className="border-b-2">
             <td>TextArea's value</td>
-            <td>
+            <td onClick={() => highLightForContent(child)}>
               <textarea
                 className="color-black z-10 bg-pink-100"
                 ref={input}
@@ -115,7 +147,7 @@ export default defineComponent({
           </tr>
           <tr className="border-b-2">
             <td>TextArea's type</td>
-            <td>
+            <td onClick={() => highLightForContent(child)}>
               <input
                 className="color-black z-10 bg-pink-100"
                 ref={input}
@@ -143,6 +175,14 @@ export default defineComponent({
                 }}
               >
                 +
+              </button>
+              <button
+                className="btn bg-white color-black"
+                onClick={() => {
+                  removeHighLight()
+                }}
+              >
+                No HighLight
               </button>
             </td>
             <td>{showAttribute(index)}</td>

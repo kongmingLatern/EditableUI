@@ -13,3 +13,17 @@ html.dark {
 .m-1 {
   margin: 1rem;
 }
+
+@keyframes animate {
+  from {
+    background-color: #fff;
+  }
+  to {
+    background-color: yellow;
+  }
+}
+.highLight {
+  animation: animate 0.5s ease-in infinite alternate;
+  color: #000;
+  transform: translateZ(0);
+}

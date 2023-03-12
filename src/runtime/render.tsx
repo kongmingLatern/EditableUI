@@ -34,18 +34,19 @@ export function renderAllChildren(allChildren) {
   })
 }
 
+let index = 0
 // 获取所有需要编辑的元素
 export function getAllChildrenEdit(children) {
   console.log('children', children)
 
-  return children.map((child, index) => {
+  return children.map(child => {
     // 组件
     if (Array.isArray(child)) {
       return child.map(ch =>
         Array.isArray(ch) ? (
           getAllChildrenEdit(ch)
         ) : isSimpleComponent(ch.value) ? (
-          <EditTable child={ch} index={index} />
+          <EditTable child={ch} index={index++} />
         ) : (
           getAllChildrenEdit(ch.children)
         )
@@ -53,7 +54,7 @@ export function getAllChildrenEdit(children) {
     } else if (isNested(child)) {
       return getAllChildrenEdit(child.children)
     } else {
-      return <EditTable child={child} index={index} />
+      return <EditTable child={child} index={index++} />
     }
   })
 }

@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 function getAllSlotsChildrenContext(children: any[]) {
   console.log('children', children)
   const newArr = children.map(child => {
@@ -11,7 +12,7 @@ function getAllSlotsChildrenContext(children: any[]) {
         return getAllSlotsChildrenContext([isComponent])
       } else {
         return {
-          props: child.props || {},
+          props: { ...child.props, '': uuidv4() },
           value: isComponent,
           type:
             typeof child.type.render() === 'string'
@@ -25,12 +26,12 @@ function getAllSlotsChildrenContext(children: any[]) {
     } else if (!Array.isArray(child.children)) {
       return {
         type: child.type,
-        props: child.props || {},
+        props: { ...child.props, 'data-edit': uuidv4() },
         value: child.children,
       }
     } else {
       return {
-        props: child.props || {},
+        props: { ...child.props, 'data-edit': uuidv4() },
         value: '',
         type: child.type,
         children: getAllSlotsChildrenContext(
