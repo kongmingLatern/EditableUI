@@ -51,20 +51,22 @@ See [](https://github.com/antfu/vitesse) for full featureset.
 
 ### Thought
 
-The page are all elements in the value through `Proxy`, and rebuild the rendering process【将页面中的所有元素值均通过 Proxy 代理起来，并重新构建渲染流程】
+The page are all elements in the value through `Proxy`, and rebuild the rendering process
+
+【获取到标签内的所有元素，并将这些元素值均通过 Proxy 代理起来，并重新构建渲染流程】
 
 ### Difficulty
 
 - How to get the value of the element【如何获取元素的值】
 
-- How to get the vnode of the element【如何获取元素的 vnode】
+- ✅ How to get the vnode of the element【如何获取元素的 vnode】
 
-- How to proxy all the elements【如何代理所有的元素】
+- ✅ How to proxy all the elements【如何代理所有的元素】
 
-- How to rebuild the rendering process【如何重新构建渲染流程】
+- ✅ How to rebuild the rendering process【如何重新构建渲染流程】
 
-- How to support vue component library【如何支持 vue 组件】
+- ✅ How to support vue component library【如何支持 vue 组件】
 
-- How to support vue tsx component library【如何支持 vue tsx 组件】
+- ✅ How to support vue tsx component library【如何支持 vue tsx 组件】
 
-- How to support various component library【如何支持各种组件库】
+- ❌ How to support various component library【如何支持各种组件库】
