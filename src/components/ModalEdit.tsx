@@ -1,5 +1,5 @@
 import Save from './Save'
-import { getAllChildrenEdit } from '~/runtime'
+import { getAllChildrenEdit } from '~/packages/runtime'
 
 export default defineComponent({
   props: {

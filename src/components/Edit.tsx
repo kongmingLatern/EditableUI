@@ -1,5 +1,5 @@
 import { reactiveChildren } from '~/shared/helpers'
-import { renderAllChildren } from '~/runtime'
+import { renderAllChildren } from '~/packages/runtime'
 import ModalEdit from './ModalEdit'
 
 export default defineComponent({

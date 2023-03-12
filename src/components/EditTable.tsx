@@ -1,58 +1,9 @@
+import {
+  renderChildrenProps,
+  renderHighLight,
+} from '~/packages/reactivity-dom'
 // 记录所有元素的 props
 let allProps: any = []
-// 记录选择的元素
-let selectedElement: Element | null = null
-
-function initProps(childProps) {
-  allProps.push(combineAttribute(childProps))
-}
-
-function combineAttribute(props) {
-  const propsKeys = Object.keys(props)
-  const valueKeys = Object.values(props)
-  const result = propsKeys.map((key, index) => {
-    return {
-      key,
-      value: valueKeys[index],
-    }
-  })
-  return reactive(result)
-}
-
-function removeHighLight() {
-  selectedElement &&
-    // 去除 highLight 样式
-    selectedElement!.classList.remove('highLight')
-}
-function highLightForContent(child) {
-  function getElementByDataEdit() {
-    return document.querySelector(
-      `[data-edit="${child.props['data-edit']}"]`
-    )
-  }
-
-  const element = getElementByDataEdit()
-  // 排他思想，高亮显示
-  // 清除数组中的元素
-  removeHighLight()
-  // 存入数组
-  selectedElement = element
-  // 高亮显示
-  addHighLight(element)
-}
-
-function addHighLight(element: Element | null) {
-  element!.classList.add('highLight')
-}
-
-function combineArrayToAttribute(arr: Array<any>) {
-  const result = {}
-  arr.forEach(prop => {
-    result[prop.key] = prop.value
-  })
-  console.log(result)
-  return result
-}
 
 export default defineComponent({
   props: {
@@ -65,8 +16,37 @@ export default defineComponent({
   },
   setup({ child, index }) {
     const input = ref<HTMLInputElement>()
-    initProps(child!.props)
+    const { initProps, combineArrayToAttribute } =
+      renderChildrenProps(child!.props)
+
+    const { initHighLight, removeHighLight } =
+      renderHighLight()
+
+    initProps(allProps)
     console.log('render', allProps)
+
+    const renderContent = type => {
+      return (
+        <td onClick={() => initHighLight(child)}>
+          <textarea
+            className="color-black z-10 bg-pink-100"
+            ref={input}
+            type="textarea"
+            value={
+              typeof child![type] === 'symbol'
+                ? 'text'
+                : child![type]
+            }
+            onInput={event => {
+              child![type] = (
+                event.target as HTMLInputElement
+              ).value
+            }}
+          />
+        </td>
+      )
+    }
+
     const Input = (prop, type, value) => {
       const inputEvent = (event, type) => {
         const newValue = (event.target as HTMLInputElement)
@@ -100,9 +80,6 @@ export default defineComponent({
     }
 
     function showAttribute(index) {
-      console.log('showAttribute', allProps)
-      console.log('index', index)
-
       return allProps[index].map(prop => {
         return prop.key !== 'data-edit' ? (
           <tr>
@@ -131,39 +108,11 @@ export default defineComponent({
           </tr>
           <tr className="border-b-2">
             <td>TextArea's value</td>
-            <td onClick={() => highLightForContent(child)}>
-              <textarea
-                className="color-black z-10 bg-pink-100"
-                ref={input}
-                type="textarea"
-                value={child!.value}
-                onInput={event => {
-                  child!.value = (
-                    event.target as HTMLInputElement
-                  ).value
-                }}
-              />
-            </td>
+            {renderContent('value')}
           </tr>
           <tr className="border-b-2">
             <td>TextArea's type</td>
-            <td onClick={() => highLightForContent(child)}>
-              <input
-                className="color-black z-10 bg-pink-100"
-                ref={input}
-                type="textarea"
-                value={
-                  typeof child!.type === 'symbol'
-                    ? 'text'
-                    : child!.type
-                }
-                onInput={event => {
-                  child!.type = (
-                    event.target as HTMLInputElement
-                  ).value
-                }}
-              />
-            </td>
+            {renderContent('type')}
           </tr>
           <tr className="border-b-2">
             <td className="text-center">
@@ -174,7 +123,7 @@ export default defineComponent({
                   addAttribute(index)
                 }}
               >
-                +
+                Add Attribute
               </button>
               <button
                 className="btn bg-white color-black"

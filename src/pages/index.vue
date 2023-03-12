@@ -1,4 +1,9 @@
 <template>
+  <a-button>123123</a-button>
+  <div btn>
+    <span>123123</span>
+  </div>
+  <a-button>123123</a-button>
   <Edit>
     <span>123123</span>
     <span>123123</span>
@@ -13,13 +18,14 @@
       </div>
     </div>
   </Edit>
-  <button btn font-bold bg-red-500 text-white>
+
+  <Edit>
     <A />
-    测试按钮
-  </button>
+  </Edit>
 </template>
 
 <script setup lang="ts">
+import Demo from './Demo.vue'
 import Edit from '~/components/Edit'
 </script>
 
