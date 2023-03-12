@@ -35,11 +35,11 @@
 
 - ✅ Support HighLight when edit【当进行编辑的时候可以高亮显示】
 
-- ✅ Support Antd render 【当进行编辑的时候可以高亮显示】
+- ✅ Support Antd render 【支持 Antd 组件库的渲染】
 
 <br>
 
-See [Vitesse](https://github.com/antfu/vitesse) for full featureset.
+See [](https://github.com/antfu/vitesse) for full featureset.
 
 ## Furture
 
