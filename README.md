@@ -19,9 +19,11 @@
 
 ## Features
 
-- ⚡️ Reactivity UI with [Vue 3]
+- ⚡️ Reactivity UI with Vue 3【基于 Vue3 的响应式组件】
 
-- 🗂 Support Vue3 Setup And TSX
+- 🗂 Support update Element Value and Attribute【支持更新元素的值和属性】
+
+- 🗂 Support Vue3 Setup And TSX【支持 Vue3 Setup 格式的 vue 组件以及 tsx 组件】
 
 - 📦 Support Host Component【支持原生标签】
 
@@ -39,21 +41,19 @@
 
 See [Vitesse](https://github.com/antfu/vitesse) for full featureset.
 
-# Feature
+## Furture
 
 - ⚡️ Inject CSS Style【提前注入样式】
 
 - ⚡️ All aspects of support various component library【全方面支持各种组件库】
 
--
+## How realize
 
-# How realize
-
-## Thought
+### Thought
 
 The page are all elements in the value through `Proxy`, and rebuild the rendering process【将页面中的所有元素值均通过 Proxy 代理起来，并重新构建渲染流程】
 
-## Difficulty
+### Difficulty
 
 - How to get the value of the element【如何获取元素的值】
 
