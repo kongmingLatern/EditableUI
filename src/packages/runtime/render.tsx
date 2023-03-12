@@ -93,7 +93,7 @@ function renderTextOrFragment(vnode) {
 
   if (typeof vnode === 'string') {
     return {
-      type: 'Fragment',
+      type: 'text',
       props: { 'data-edit': uuidv4() },
       value: vnode,
     }
@@ -101,7 +101,7 @@ function renderTextOrFragment(vnode) {
 
   if (Array.isArray(vnode.children)) {
     return {
-      type: 'Fragment',
+      type: 'text',
       props: { 'data-edit': uuidv4() },
       value: '',
       children: vnode.children.map(item =>
@@ -110,7 +110,7 @@ function renderTextOrFragment(vnode) {
     }
   } else {
     return {
-      type: 'Fragment',
+      type: 'text',
       props: { 'data-edit': uuidv4() },
       value: vnode.children,
     }

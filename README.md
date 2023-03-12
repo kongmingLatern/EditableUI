@@ -7,7 +7,7 @@
 </h6>
 
 <h5 align='center'>
-<b>Lightweight version of <a href="https://github.com/antfu/vitesse">Vitesse</a></b>
+<b>A tool can help you debug css  when starting server</b>
 </h5>
 
 <br>
@@ -19,70 +19,52 @@
 
 ## Features
 
-- ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite 3](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/), [ESBuild](https://github.com/evanw/esbuild) - born with fastness
+- ⚡️ Reactivity UI with [Vue 3]
 
-- 🗂 [File based routing](./src/pages)
+- 🗂 Support Vue3 Setup And TSX
 
-- 📦 [Components auto importing](./src/components)
+- 📦 Support Host Component【支持原生标签】
 
-- 🎨 [UnoCSS](https://github.com/antfu/unocss) - The instant on-demand atomic CSS engine.
+- 🎨 Support Nested Component【支持嵌套标签】
 
-- 😃 Use icons from any icon sets in [Pure CSS](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
+- 😃 Support Vue3 Component【支持普通 Vue3 组件】
 
-- 🔥 Use the [new `<script setup>` style](https://github.com/vuejs/rfcs/pull/227)
+- 🔥 Support Vue3 TSX Component【支持普通 Vue3 TSX 组件】
 
-- ✅ Use [Vitest](http://vitest.dev/) for unit and components testing
+- ✅ Support HighLight when edit【当进行编辑的时候可以高亮显示】
 
-- 🦾 TypeScript, of course
-
-- ☁️ Deploy on Netlify, zero-config
-
+- ✅ Support Antd render 【当进行编辑的时候可以高亮显示】
 
 <br>
 
 See [Vitesse](https://github.com/antfu/vitesse) for full featureset.
 
+# Feature
 
-## Dropped Features from [Vitesse](https://github.com/antfu/vitesse)
+- ⚡️ Inject CSS Style【提前注入样式】
 
-- ~~i18n~~
-- ~~Layouts~~
-- ~~SSG~~
-- ~~PWA~~
-- ~~Markdown~~
+- ⚡️ All aspects of support various component library【全方面支持各种组件库】
 
-## Pre-packed
+-
 
-### UI Frameworks
+# How realize
 
-- [UnoCSS](https://github.com/antfu/unocss) - The instant on-demand atomic CSS engine.
+## Thought
 
-### Icons
+The page are all elements in the value through `Proxy`, and rebuild the rendering process【将页面中的所有元素值均通过 Proxy 代理起来，并重新构建渲染流程】
 
-- [Iconify](https://iconify.design) - use icons from any icon sets [🔍Icônes](https://icones.netlify.app/)
-- [Pure CSS Icons via UnoCSS](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
+## Difficulty
 
-### Plugins
+- How to get the value of the element【如何获取元素的值】
 
-- [Vue Router](https://github.com/vuejs/vue-router)
-  - [`vite-plugin-pages`](https://github.com/hannoeru/vite-plugin-pages) - file system based routing
-- [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import) - Directly use Vue Composition API and others without importing
-- [`unplugin-vue-components`](https://github.com/antfu/unplugin-vue-components) - components auto import
-- [`unplugin-vue-macros`](https://github.com/sxzz/unplugin-vue-macros) - Explore and extend more macros and syntax sugar to Vue.
-- [VueUse](https://github.com/antfu/vueuse) - collection of useful composition APIs
+- How to get the vnode of the element【如何获取元素的 vnode】
 
-## Try it now!
+- How to proxy all the elements【如何代理所有的元素】
 
-### GitHub Template
+- How to rebuild the rendering process【如何重新构建渲染流程】
 
-[Create a repo from this template on GitHub](https://github.com/antfu/vitesse-lite/generate).
+- How to support vue component library【如何支持 vue 组件】
 
-### Clone to local
+- How to support vue tsx component library【如何支持 vue tsx 组件】
 
-If you prefer to do it manually with the cleaner git history
-
-```bash
-npx degit antfu/vitesse-lite my-vitesse-app
-cd my-vitesse-app
-pnpm i # If you don't have pnpm installed, run: npm install -g pnpm
-```
+- How to support various component library【如何支持各种组件库】
