@@ -128,7 +128,10 @@ function Component(type) {
     return type.hasOwnProperty('install')
   }
   function VueComponent() {
-    return type.hasOwnProperty('render')
+    return (
+      type.hasOwnProperty('render') ||
+      type.hasOwnProperty('setup')
+    )
   }
   if (AntdComponent()) {
     return ComponentType.ANT_DESIGN_VUE
@@ -194,7 +197,7 @@ function renderComponent(child) {
 function renderVueComponent(child) {
   console.log('renderVueComponent', child)
   const renderOrSetup =
-    child.type.render() ??
+    child.type.render?.() ??
     child.type?.setup?.() ??
     child.type?.setup?.()?.()
   console.log('renderOrSetup', renderOrSetup)
