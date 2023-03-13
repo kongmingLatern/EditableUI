@@ -13,9 +13,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import Edit from '~/components/Edit'
-import Button from '~/components/Button'
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

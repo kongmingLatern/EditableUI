@@ -110,6 +110,7 @@ function renderTextOrFragment(vnode) {
         initChildrenByType({
           ...item,
           file: vnode.file,
+          parent: vnode,
         })
       ),
     }
@@ -119,7 +120,7 @@ function renderTextOrFragment(vnode) {
       props: { 'data-edit': uuidv4() },
       value: vnode.children,
       file: vnode.file,
-      parent: vnode,
+      parent: vnode.parent || null,
     }
   }
 }
@@ -159,13 +160,14 @@ function renderElement(child) {
         initChildrenByType({
           ...item,
           file: child.file,
+          parent: child,
         })
       ),
       file: child.file,
     }
   } else {
     return {
-      parent: child || null,
+      parent: child.parent || null,
       props: { ...child.props, 'data-edit': uuidv4() },
       value: child.children,
       type: child.type,
@@ -241,7 +243,7 @@ function renderVueComponent(child) {
 }
 
 // helper 函数 渲染元素(主递归)
-function renderChildren(children) {
+export function renderChildren(children) {
   console.log('children', children)
   return Array.isArray(children)
     ? children.map(child => {
