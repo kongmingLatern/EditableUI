@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+        <link href="../../dist/style.css"  rel="stylesheet"></link>
+    <title>Document</title>
+    <script src="../../node_modules/vue/dist/vue.global.js"></script>
+    <script src="../../dist/EditableUi.iife.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      // import EditableUi from '../../dist/EditableUi.iife.js'
+      // import Vue from '../../node_modules/vue/dist/vue.global.js'
+      // console.log(Vue.createApp())
+      console.log(EditableUi)
+      const { createApp } = Vue
+      createApp({
+        template: `<Edit>123123</Edit>`,
+      })
+        .use(EditableUi.default)
+        .mount('#app')
+      // import { Edit } from '../../dist/EditableUi.esm.js'
+      // console.log(Edit)
+      // const { createApp } = Vue
+      // createApp({
+      //   template: `<Edit>123123</Edit>`,
+      // })
+      //   .use(Edit)
+      //   .mount('#app')
+    </script>
+  </body>
+</html>

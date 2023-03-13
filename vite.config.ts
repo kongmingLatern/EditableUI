@@ -9,11 +9,20 @@ import Unocss from 'unocss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import VueMacros from 'unplugin-vue-macros/vite'
 import presetAttributify from '@unocss/preset-attributify'
+const rollupOptions = {
+  external: ['vue', 'vue-router'],
+  output: {
+    globals: {
+      vue: 'Vue',
+    },
+  },
+}
 
 export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
+      vue: 'vue/dist/vue.esm-bundler.js',
     },
   },
   plugins: [
@@ -66,6 +75,17 @@ export default defineConfig({
       ],
     }),
   ],
+  build: {
+    rollupOptions,
+    minify: false,
+    lib: {
+      entry: './src/index.ts',
+      name: 'EditableUi',
+      fileName: 'EditableUi',
+      // 导出模块格式
+      formats: ['esm', 'umd', 'iife'],
+    },
+  },
   test: {
     environment: 'jsdom',
     globals: true,
