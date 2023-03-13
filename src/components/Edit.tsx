@@ -3,7 +3,13 @@ import { renderAllChildren } from '~/packages/runtime'
 import ModalEdit from './ModalEdit'
 
 export default defineComponent({
-  setup(_, { slots }) {
+  props: {
+    vertical: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup({ vertical }, { slots }) {
     const isShow = ref<boolean>(false)
     const input = ref<HTMLInputElement>()
     const children = slots.default?.() || []
@@ -25,6 +31,7 @@ export default defineComponent({
             {renderAllChildren(allChildren)}
           </div>
           <ModalEdit
+            vertical={vertical}
             isShow={isShow}
             allChildren={allChildren}
           />

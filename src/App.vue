@@ -6,7 +6,7 @@ import Edit from '~/components/Edit'
   <!-- <main font-sans text="gray-700 dark:gray-200">
     <RouterView />
   </main> -->
-  <Edit>
+  <Edit align="horizontal">
     <Index />
   </Edit>
 </template>

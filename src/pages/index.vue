@@ -1,16 +1,5 @@
 <template>
-  <span>123123</span>
-  <span>123123</span>
-  <span>123123</span>
-  <span>123123</span>
-  <div>
-    123123123
-    <span>fasdifjasiodfj</span>
-    <div flex>
-      <div class="left">left</div>
-      <div class="right">right</div>
-    </div>
-  </div>
+  <A />
 </template>
 
 <script setup lang="ts"></script>

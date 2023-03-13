@@ -9,15 +9,34 @@ export default defineComponent({
     allChildren: {
       type: Array,
     },
+    vertical: {
+      type: Boolean,
+      default: false,
+    },
   },
-  setup({ isShow, allChildren }) {
+  setup({ isShow, allChildren, vertical }) {
+    const style = ref(getStyleByVertical(vertical))
     function save() {
       isShow!.value = false
     }
     return () => (
       <>
         {isShow!.value && (
-          <div className="flex flex-col color-white h-screen absolute top-0 right-0 overflow-y-scroll">
+          <div
+            className={
+              'flex flex-col color-white overflow-y-scroll ' +
+              style.value
+            }
+          >
+            <button
+              className="btn"
+              onClick={() => {
+                style.value = getStyleByVertical(!vertical)
+                vertical = !vertical
+              }}
+            >
+              转换视图
+            </button>
             {getAllChildrenEdit(allChildren)}
             <Save onSave={save} />
           </div>
@@ -26,3 +45,13 @@ export default defineComponent({
     )
   },
 })
+function getStyleByVertical(vertical: boolean): string {
+  console.log('vertical', vertical)
+  return vertical
+    ? `
+      h-screen absolute top-0 right-0
+    `
+    : `
+     w-[100%] h-[440px] absolute bottom-0 left-0
+    `
+}

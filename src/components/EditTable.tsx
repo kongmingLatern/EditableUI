@@ -82,6 +82,7 @@ export default defineComponent({
         />
       )
     }
+
     function setupProps(index) {
       console.log('index', index)
       child!.props = {}
