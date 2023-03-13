@@ -47,6 +47,18 @@ export default defineComponent({
       )
     }
 
+    const renderFileName = () => {
+      console.log('renderFileName', child)
+
+      return (
+        <td onClick={() => initHighLight(child)}>
+          <span className="bg-red-500 z-10 font-bold color-white">
+            {child!.file}
+          </span>
+        </td>
+      )
+    }
+
     const Input = (prop, type, value) => {
       const inputEvent = (event, type) => {
         const newValue = (event.target as HTMLInputElement)
@@ -105,6 +117,10 @@ export default defineComponent({
           <tr className="border-b-2">
             <th>Key</th>
             <th>Value</th>
+          </tr>
+          <tr className="border-b-2">
+            <td>File</td>
+            {renderFileName()}
           </tr>
           <tr className="border-b-2">
             <td>TextArea's value</td>

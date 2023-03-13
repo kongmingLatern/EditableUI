@@ -101,11 +101,16 @@ function renderTextOrFragment(vnode) {
 
   if (Array.isArray(vnode.children)) {
     return {
+      parent: vnode,
       type: 'text',
       props: { 'data-edit': uuidv4() },
       value: '',
+      file: vnode.file,
       children: vnode.children.map(item =>
-        initChildrenByType(item)
+        initChildrenByType({
+          ...item,
+          file: vnode.file,
+        })
       ),
     }
   } else {
@@ -113,14 +118,14 @@ function renderTextOrFragment(vnode) {
       type: 'text',
       props: { 'data-edit': uuidv4() },
       value: vnode.children,
+      file: vnode.file,
+      parent: vnode,
     }
   }
 }
 
 function getComponentType(type) {
   return Component(type)
-  // 判断是什么组件库
-  // return ComponentType.ANT_DESIGN_VUE
 }
 
 function Component(type) {
@@ -146,18 +151,25 @@ function renderElement(child) {
 
   if (Array.isArray(child.children)) {
     return {
+      parent: child,
       value: '',
       type: child.type,
       props: { ...child.props, 'data-edit': uuidv4() },
       children: child.children.map(item =>
-        initChildrenByType(item)
+        initChildrenByType({
+          ...item,
+          file: child.file,
+        })
       ),
+      file: child.file,
     }
   } else {
     return {
+      parent: child || null,
       props: { ...child.props, 'data-edit': uuidv4() },
       value: child.children,
       type: child.type,
+      file: child.file,
     }
   }
 }
@@ -200,7 +212,13 @@ function renderVueComponent(child) {
     child.type.render?.() ??
     child.type?.setup?.() ??
     child.type?.setup?.()?.()
+
+  const file = child.type?.__file
+
+  file && (renderOrSetup['file'] = file)
+
   console.log('renderOrSetup', renderOrSetup)
+  console.log('file', file)
 
   // 组件嵌套
   if (isObject(renderOrSetup)) {
