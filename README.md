@@ -18,9 +18,7 @@
 </p>
 
 ## Preview
-
-![2.gif](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa013809f7204b9baca582c29faa071d~tplv-k3u1fbpfcp-watermark.image?)
-
+![image](https://github.com/kongmingLatern/EditableUI/tree/main/src/assets/help.gif)
 ## Usage
 
 ### Install
