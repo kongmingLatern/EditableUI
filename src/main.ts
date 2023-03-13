@@ -1,13 +1,13 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import Antd from 'ant-design-vue'
+// import Antd from 'ant-design-vue'
 import routes from 'virtual:generated-pages'
 import App from './App.vue'
 
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
-import 'ant-design-vue/dist/antd.css'
+// import 'ant-design-vue/dist/antd.css'
 
 const app = createApp(App)
 const router = createRouter({
@@ -28,5 +28,5 @@ const router = createRouter({
 // app.directive('edit', editDirective)
 
 app.use(router)
-app.use(Antd)
+// app.use(Antd)
 app.mount('#app')

@@ -17,6 +17,48 @@
 <!-- Contributors: Thanks for geting interested, however we DON'T accept new transitions to the README, thanks. -->
 </p>
 
+## Preview
+
+![2.gif](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa013809f7204b9baca582c29faa071d~tplv-k3u1fbpfcp-watermark.image?)
+
+## Usage
+
+### Install
+
+```bash
+  npm install editable-ui -D
+```
+
+### App.use
+
+```js
+import Edit from 'editable-ui/EditableUi.esm'
+import 'editable-ui/style.css' // This UI will be depended on 'unocss', Later I will change it
+
+createApp(App).use(Edit).mount('#app')
+```
+
+### Use
+
+```vue
+<Edit>
+    <a href="https://vitejs.dev" target="_blank">
+      <img src="/vite.svg" class="logo" alt="Vite logo" />
+    </a>
+    <a href="https://vuejs.org/" target="_blank">
+      <img
+        src="./assets/vue.svg"
+        class="logo vue"
+        alt="Vue logo"
+      />
+    </a>
+    <div>123132</div>
+    1123123
+  </Edit>
+```
+
+> And then you can edit the element value and attribute by double click！
+
 ## Features
 
 - ⚡️ Reactivity UI with Vue 3【基于 Vue3 的响应式组件】
@@ -31,7 +73,7 @@
 
 - 😃 Support Vue3 Component【支持普通 Vue3 组件】
 
-- 🔥 Support Vue3 TSX Component【支持普通 Vue3 TSX 组件】
+- 🔥 Support Vue3 TSX Component【支持普通 Vue3 TSX Setup 语法的组件】
 
 - ✅ Support HighLight when edit【当进行编辑的时候可以高亮显示】
 

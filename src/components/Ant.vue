@@ -1,5 +1,4 @@
 <template>
-  <a-button type="primary">确认</a-button>
   <table border>
     <tr>
       <th>Key</th>

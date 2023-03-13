@@ -10,15 +10,10 @@ import EditTable from '~/components/EditTable'
 
 // 渲染所有元素（包括组件）
 export function renderAllChildren(allChildren) {
-  console.log('renderAllChildren', allChildren)
-
   return allChildren.map(child => {
     if (Array.isArray(child)) {
-      console.log('renderAllChildren component', child)
-
       return child.map(ch => {
         // 单节点的组件只有一个 value 值
-        console.log('ch', ch)
         return Array.isArray(ch)
           ? renderChildren(ch)
           : isSimpleComponent(ch.value)
@@ -44,8 +39,6 @@ export function renderAllChildren(allChildren) {
 let index = 0
 // 获取所有需要编辑的元素
 export function getAllChildrenEdit(children) {
-  console.log('children', children)
-
   return children.map(child => {
     // 组件
     if (Array.isArray(child)) {
@@ -244,7 +237,8 @@ function renderVueComponent(child) {
 
 // helper 函数 渲染元素(主递归)
 export function renderChildren(children) {
-  console.log('children', children)
+  console.log('renderChildren', children)
+
   return Array.isArray(children)
     ? children.map(child => {
         if (child.value === '' && child.children) {
