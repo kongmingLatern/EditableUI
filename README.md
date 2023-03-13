@@ -19,7 +19,7 @@
 
 ## Preview
 
-![Preview](https://github.com/kongmingLatern/EditableUI/tree/main/src/assets/help.gif)
+![Preview](https://github.com/kongmingLatern/EditableUI/blob/main/src/assets/help.gif)
 
 ## Usage
 
