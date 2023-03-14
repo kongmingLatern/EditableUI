@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   src: string
   alt: string
 }>()
