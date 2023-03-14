@@ -113,7 +113,7 @@ function renderTextOrFragment(vnode) {
         parent: vnode,
         type: item.type,
         value: item.children,
-        props: { 'data-edit': uuidv4() },
+        props: { ...item.props, 'data-edit': uuidv4() },
         file: vnode.file,
       }
     })
@@ -243,7 +243,7 @@ function renderComponent(child) {
 function renderVueComponent(child) {
   console.log('renderVueComponent', child)
   const renderOrSetup = child.type.render(
-    {},
+    child.ctx,
     {},
     child.props
   )

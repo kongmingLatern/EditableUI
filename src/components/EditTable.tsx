@@ -93,6 +93,7 @@ export default defineComponent({
     }
 
     function showAttribute(index) {
+      console.log('showAttribute', allProps[index])
       return allProps[index].map(prop => {
         return prop.key !== 'data-edit' ? (
           <tr>
