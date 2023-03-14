@@ -2,6 +2,8 @@ export * from './helpers'
 
 export * from './SlotsType'
 
+export * from './ComponentType'
+
 export function isSimpleComponent(value) {
   return value !== ''
 }

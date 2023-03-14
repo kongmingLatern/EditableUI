@@ -1,3 +1,3 @@
-export * from './renderChildrenProps'
+export * from './src/renderChildrenProps'
 
-export * from './renderHighLight'
+export * from './src/renderHighLight'
