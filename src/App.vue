@@ -7,7 +7,7 @@ import Edit from '~/components/Edit'
   <img src="./assets/cj1.jpeg" alt="this a picture" />
   <Edit>
     <button>I'm inside Edit button</button>
-    <div>
+    <div @click="add">
       12313
       <span>12313</span>
     </div>
