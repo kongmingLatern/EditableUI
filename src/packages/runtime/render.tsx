@@ -93,22 +93,36 @@ function renderTextOrFragment(vnode) {
   }
 
   if (Array.isArray(vnode.children)) {
-    return {
-      parent: vnode,
-      type: 'text',
-      props: { 'data-edit': uuidv4() },
-      value: '',
-      file: vnode.file,
-      children: vnode.children.map(item =>
-        initChildrenByType({
-          ...item,
-          file: vnode.file,
-          parent: vnode,
-        })
-      ),
-    }
+    // return {
+    //   parent: vnode,
+    //   type: 'Fragment',
+    //   props: { 'data-edit': uuidv4() },
+    //   value: '',
+    //   file: vnode.file,
+    //   children: vnode.children.map(item =>
+    //     initChildrenByType({
+    //       ...item,
+    //       file: vnode.file,
+    //       parent: vnode,
+    //     })
+    //   ),
+    // }
+    // 去除最外层
+    return vnode.children.map(item => {
+      return {
+        parent: vnode,
+        type: item.type,
+        value: item.children,
+        props: { 'data-edit': uuidv4() },
+        file: vnode.file,
+      }
+    })
   } else {
     return {
+      // 纯文本
+      // 本来的样式 Symbol(Text)
+      // type: vnode.type,
+      // 为了方便调试，对于纯文本，添加一个 text 标签
       type: 'text',
       props: { 'data-edit': uuidv4() },
       value: vnode.children,
@@ -116,6 +130,31 @@ function renderTextOrFragment(vnode) {
       parent: vnode.parent || null,
     }
   }
+  // Fragment
+  // if (Array.isArray(vnode.children)) {
+  //   return {
+  //     parent: vnode,
+  //     type: 'Fragment',
+  //     props: { 'data-edit': uuidv4() },
+  //     value: '',
+  //     file: vnode.file,
+  //     children: vnode.children.map(item =>
+  //       initChildrenByType({
+  //         ...item,
+  //         file: vnode.file,
+  //         parent: vnode,
+  //       })
+  //     ),
+  //   }
+  // } else {
+  //   return {
+  //     type: 'Fragment',
+  //     props: { 'data-edit': uuidv4() },
+  //     value: vnode.children,
+  //     file: vnode.file,
+  //     parent: vnode.parent || null,
+  //   }
+  // }
 }
 
 function getComponentType(type) {
@@ -203,10 +242,19 @@ function renderComponent(child) {
 
 function renderVueComponent(child) {
   console.log('renderVueComponent', child)
-  const renderOrSetup =
-    child.type.render?.() ??
-    child.type?.setup?.() ??
-    child.type?.setup?.()?.()
+  const renderOrSetup = child.type.render(
+    {},
+    {},
+    child.props
+  )
+  // // child.type?.setup(child.props, {
+  // //   expose: () => {},
+  // // }) ?? child.type.render?.()
+  // child.type?.setup?.(child?.props, {
+  //   expose: () => {},
+  // }) ??
+  // child.type.render?.(child, child?.props) ??
+  // child.type?.setup?.()?.()
 
   const file = child.type?.__file
 
