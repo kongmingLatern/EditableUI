@@ -2,6 +2,11 @@ import {
   renderChildrenProps,
   renderHighLight,
 } from '~/packages/reactivity-dom'
+
+import {
+  copyText as copyToBoard,
+  combineStrByProps,
+} from '~/packages/shared'
 // 记录所有元素的 props
 let allProps: any = []
 
@@ -93,7 +98,6 @@ export default defineComponent({
     }
 
     function showAttribute(index) {
-      console.log('showAttribute', allProps[index])
       return allProps[index].map(prop => {
         return prop.key !== 'data-edit' ? (
           <tr>
@@ -103,37 +107,19 @@ export default defineComponent({
         ) : null
       })
     }
-    function copyText(index){
-          console.log(allProps[index]);
-          let str=''
-          allProps[index].map(prop=>{
-            if(prop.key !== 'data-edit')str+=prop.key+":\""+prop.value+"\","
-          })
-          let newarr ="{"+str.slice(0,str.length-1)+"}"
-          //创建input标签
-          var input = document.createElement('input')
-          //将input的值设置为需要复制的内容
-          input.value = newarr
-          //添加input标签
-          document.body.appendChild(input)
-          //选中input标签
-          input.select()
-          //执行复制 
-          document.execCommand('copy')
-          //成功提示信息 
-          console.log('复制成功');
-          //移除input标签
-          document.body.removeChild(input)
-      }
+
+    function copyText(index) {
+      // 根据 props 拼接字符串
+      let content = combineStrByProps(allProps[index])
+      // 复制到剪切板
+      copyToBoard(content)
+    }
     function addAttribute(index) {
-      console.log('index', index)
-      console.log('allProps', allProps)
       allProps[index].push({
         key: '',
         value: '',
       })
     }
-
     return () => (
       <div className="bg-[#888] border">
         <table className="border">

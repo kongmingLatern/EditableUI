@@ -4,6 +4,8 @@ export * from './src/SlotsType'
 
 export * from './src/ComponentType'
 
+export * from './src/copyText'
+
 export function isSimpleComponent(value) {
   return value !== ''
 }
