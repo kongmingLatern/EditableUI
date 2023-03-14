@@ -1,4 +1,4 @@
-import { reactiveChildren } from '~/shared/helpers'
+import { reactiveChildren } from '~/packages/shared/helpers'
 import { renderAllChildren } from '~/packages/runtime'
 import ModalEdit from './ModalEdit'
 

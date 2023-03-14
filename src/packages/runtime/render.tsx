@@ -4,7 +4,7 @@ import {
   isObject,
   SlotsType,
   ComponentType,
-} from '~/shared'
+} from 'editable-ui-shared'
 import { v4 as uuidv4 } from 'uuid'
 import EditTable from '~/components/EditTable'
 

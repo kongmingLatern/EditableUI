@@ -11,6 +11,5 @@ import Edit from '~/components/Edit'
       12313
       <span>12313</span>
     </div>
-    <B />
   </Edit>
 </template>

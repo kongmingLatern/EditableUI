@@ -1,6 +1,6 @@
 import { renderChildren } from '~/packages/runtime'
-import { reactiveChildren } from '~/shared'
-import { SlotsType } from '~/shared/SlotsType'
+import { reactiveChildren } from '~/packages/shared'
+import { SlotsType } from '~/packages/shared/SlotsType'
 
 describe('reactiveChildren Function', () => {
   it('TextContent', () => {
