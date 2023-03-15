@@ -18,7 +18,14 @@ export function renderChildrenProps(childProps) {
   function combineArrayToAttribute(arr: Array<any>) {
     const result = {}
     arr.forEach(prop => {
-      result[prop.key] = prop.value
+      if (prop.key.startsWith('on')) {
+        // 说明是函数
+        console.log('函数')
+        const func = new Function('return ' + prop.value)
+        result[prop.key] = func()
+      } else {
+        result[prop.key] = prop.value
+      }
     })
     console.log(result)
     return result
