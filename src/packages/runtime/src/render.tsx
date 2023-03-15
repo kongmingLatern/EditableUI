@@ -121,9 +121,9 @@ function mountTextOrFragment(vnode) {
     return {
       // 纯文本
       // 本来的样式 Symbol(Text)
-      // type: vnode.type,
+      type: vnode.parent.type,
       // 为了方便调试，对于纯文本，添加一个 text 标签
-      type: 'text',
+      // type: 'text',
       props: { 'data-edit': uuidv4() },
       value: vnode.children,
       file: vnode.file,
@@ -183,20 +183,15 @@ function mountElement(child) {
   console.log('mountElement', child)
 
   if (Array.isArray(child.children)) {
-    return {
-      parent: child,
-      value: '',
-      type: child.type,
-      props: { ...child.props, 'data-edit': uuidv4() },
-      children: child.children.map(item =>
-        initChildrenByType({
-          ...item,
-          file: child.file,
-          parent: child,
-        })
-      ),
-      file: child.file,
-    }
+    return child.children.map(item => {
+      return {
+        parent: child,
+        value: item.children[0].children,
+        type: item?.type,
+        props: { ...item.props, 'data-edit': uuidv4() },
+        file: child.file,
+      }
+    })
   } else {
     return {
       parent: child.parent || null,
@@ -242,11 +237,11 @@ function mountComponent(child) {
 
 function renderVueComponent(child) {
   console.log('renderVueComponent', child)
-  const renderOrSetup = child.type.render(
-    child.ctx,
-    {},
-    child.props
-  )
+  const renderOrSetup = child.type.hasOwnProperty('render')
+    ? child.type.render(child.ctx, {}, child.props)
+    : child.type.hasOwnProperty('setup')
+    ? child.type.setup(child.props, {})()
+    : null
   // // child.type?.setup(child.props, {
   // //   expose: () => {},
   // // }) ?? child.type.render?.()

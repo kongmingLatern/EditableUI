@@ -10,6 +10,45 @@ import {
 // 记录所有元素的 props
 let allProps: any = []
 
+const operations = {
+  copy: (props: any) => {
+    // 根据 props 拼接字符串
+    const content = combineStrByProps(props)
+    // 复制到剪切板
+    copyToBoard(content)
+  },
+}
+
+const AttributeOperations = ({
+  addAttribute,
+  removeHighLight,
+  copyText,
+  index,
+}) => {
+  return (
+    <>
+      <button
+        className="btn bg-white color-black"
+        onClick={() => addAttribute(index)}
+      >
+        Add Attribute
+      </button>
+      <button
+        className="btn bg-white color-black"
+        onClick={() => removeHighLight()}
+      >
+        No HighLight
+      </button>
+      <button
+        className="btn bg-white color-black"
+        onClick={() => copyText(index)}
+      >
+        copy
+      </button>
+    </>
+  )
+}
+
 export default defineComponent({
   props: {
     child: {
@@ -71,7 +110,7 @@ export default defineComponent({
 
         if (type === 'key') {
           prop.key = newValue
-          delete prop[value]
+          // delete prop[value]
         } else if (type === 'value') {
           prop['value'] = newValue
         }
@@ -110,17 +149,16 @@ export default defineComponent({
     }
 
     function copyText(index) {
-      // 根据 props 拼接字符串
-      let content = combineStrByProps(allProps[index])
-      // 复制到剪切板
-      copyToBoard(content)
+      operations.copy(allProps[index])
     }
+
     function addAttribute(index) {
       allProps[index].push({
         key: '',
         value: '',
       })
     }
+
     return () => (
       <div className="bg-[#888] border">
         <table className="border">
@@ -143,30 +181,12 @@ export default defineComponent({
           <tr className="border-b-2">
             <td className="text-center">
               <div>TextArea's Attribute</div>
-              <button
-                className="btn bg-white color-black"
-                onClick={() => {
-                  addAttribute(index)
-                }}
-              >
-                Add Attribute
-              </button>
-              <button
-                className="btn bg-white color-black"
-                onClick={() => {
-                  removeHighLight()
-                }}
-              >
-                No HighLight
-              </button>
-              <button
-                className="btn bg-white color-black"
-                onClick={() => {
-                  copyText(index)
-                }}
-              >
-                copy
-              </button>
+              {AttributeOperations({
+                addAttribute,
+                removeHighLight,
+                copyText,
+                index,
+              })}
             </td>
             <td>{showAttribute(index)}</td>
           </tr>
