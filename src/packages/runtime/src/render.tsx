@@ -73,16 +73,16 @@ export function initChildrenByType(vnode) {
   console.log('initChildrenByType', type)
   switch (type) {
     case SlotsType.COMPONENT:
-      return renderComponent(vnode)
+      return mountComponent(vnode)
     case SlotsType.ELEMENT:
-      return renderElement(vnode)
+      return mountElement(vnode)
     case SlotsType.TEXT_OR_FRAGMENT:
-      return renderTextOrFragment(vnode)
+      return mountTextOrFragment(vnode)
   }
 }
 
-function renderTextOrFragment(vnode) {
-  console.log('renderTextOrFragment', vnode)
+function mountTextOrFragment(vnode) {
+  console.log('mountTextOrFragment', vnode)
 
   if (typeof vnode === 'string') {
     return {
@@ -178,9 +178,9 @@ function Component(type) {
   }
 }
 
-function renderElement(child) {
+function mountElement(child) {
   // Implement
-  console.log('renderElement', child)
+  console.log('mountElement', child)
 
   if (Array.isArray(child.children)) {
     return {
@@ -226,9 +226,9 @@ function renderAntdComponent(child) {
   }
 }
 
-function renderComponent(child) {
+function mountComponent(child) {
   // 渲染 component
-  console.log('renderComponent', child)
+  console.log('mountComponent', child)
   const type = getComponentType(child.type)
   console.log(type)
 
